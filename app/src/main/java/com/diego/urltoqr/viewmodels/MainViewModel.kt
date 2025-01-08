@@ -1,5 +1,6 @@
 package com.diego.urltoqr.viewmodels;
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import com.diego.urltoqr.services.QRCodeManager
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,11 +16,22 @@ public class MainViewModel(private val qrCodeManager: QRCodeManager) : ViewModel
     private val _uiState = MutableStateFlow(MainState())
     val uiState: StateFlow<MainState> = _uiState.asStateFlow()
 
-    fun generateQRCode(url: String) {
-        qrCodeManager.generateQRCode(url)
+    fun generateQRCode(url: String): Bitmap? {
+        return qrCodeManager.generateQRCode(url)
+    }
+
+    fun addToTheList(url: String) {
         _uiState.update { currentState ->
             currentState.copy(
                 list = currentState.list + url
+            )
+        }
+    }
+
+    fun removeFromTheList(url: String) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                list = currentState.list.minus(url)
             )
         }
     }
