@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.diego.urltoqr"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.diego.urltoqr"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

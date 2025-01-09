@@ -1,4 +1,4 @@
-package com.diego.urltoqr.viewmodels;
+package com.diego.urltoqr.viewmodels
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.update
 
 data class MainState(
     val url: String = "",
-    val list: List<String> = mutableListOf<String>()
+    val list: List<String> = mutableListOf<String>(),
 )
 public class MainViewModel(private val qrCodeManager: QRCodeManager) : ViewModel() {
     private val _uiState = MutableStateFlow(MainState())
@@ -21,6 +21,9 @@ public class MainViewModel(private val qrCodeManager: QRCodeManager) : ViewModel
     }
 
     fun addToTheList(url: String) {
+        if (url.isEmpty()) return
+        if (uiState.value.list.contains(url)) return
+
         _uiState.update { currentState ->
             currentState.copy(
                 list = currentState.list + url
